@@ -31,6 +31,9 @@ config.module = {
   }, {
     test: /\.css$/,
     use: [ MiniCssExtractPlugin.loader, "css-loader" ]
+  }, {
+    test: /\.scss$/,
+    use: [ "style-loader", "css-loader", "sass-loader" ]
   } ]
 }
 
@@ -52,7 +55,7 @@ config.target = 'web'
 config.devServer = {
   open: true,
   compress: true,
-  port: 9000
+  port: 9999
 }
 
 config.resolve = {
