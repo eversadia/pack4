@@ -1,5 +1,6 @@
 const path = require( 'path' )
 const HtmlWebPackPlugin = require( "html-webpack-plugin" )
+const FaviconsWebpackPlugin = require( 'favicons-webpack-plugin' )
 const MiniCssExtractPlugin = require( "mini-css-extract-plugin" )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
 const react = require( 'react' )
@@ -55,10 +56,14 @@ config.module = {
 }
 
 config.plugins = [
+  new FaviconsWebpackPlugin( {
+    logo: './src/assets/img/favicon/apple-touch-icon-152x152.png',
+    prefix: './icons/',
+  } ),
   new HtmlWebPackPlugin( {
-
     template: "./src/template/index.html",
-    filename: "./index.html"
+    filename: "./index.html",
+    favicon: './src/assets/img/favicon/favicon.png',
   } ),
   new MiniCssExtractPlugin( {
     filename: "[name].css",
