@@ -2,6 +2,7 @@ const path = require( 'path' )
 const HtmlWebPackPlugin = require( "html-webpack-plugin" )
 const MiniCssExtractPlugin = require( "mini-css-extract-plugin" )
 const UglifyJSPlugin = require( 'uglifyjs-webpack-plugin' )
+const react = require( 'react' )
 const config = {}
 
 config.entry = {
@@ -34,6 +35,14 @@ config.module = {
   }, {
     test: /\.scss$/,
     use: [ "style-loader", "css-loader", "sass-loader" ]
+  }, {
+    test: /\.(png|jpg|gif)$/,
+    use: [ {
+      loader: 'file-loader',
+      options: {
+        name: '[path][name].[ext]'
+      }
+    } ]
   } ]
 }
 
@@ -53,12 +62,13 @@ config.mode = 'development'
 config.target = 'web'
 
 config.devServer = {
-  open: true,
+  open: false,
   compress: true,
   port: 9999
 }
 
 config.resolve = {
+  modules: [ 'node_modules' ],
   alias: {
     src: path.resolve( __dirname, 'src/' ),
     utils: path.resolve( __dirname, 'src/utils/' )

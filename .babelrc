@@ -1,5 +1,24 @@
 {
-    "presets": [
-        "env", "react"
-    ]
+  "presets": ["env", "react"],
+  "plugins": [
+    "transform-decorators-legacy",
+    "dynamic-import-webpack",
+    ["module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "utils": "./src/utils/",
+          "assets": "./src/assets/",
+          "components": "./src/components/",
+          "containers": "./src/containers/",
+          "actions": "./src/actions/",
+          "stores": "./src/stores/"
+        }
+      }
+    ],
+    ["transform-runtime", {
+      "polyfill": false,
+      "regenerator": true
+    }]
+  ]
 }
