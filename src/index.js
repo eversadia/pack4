@@ -7,3 +7,4 @@ window.iAmJavascriptES6 = iAmJavascriptES6;
 import App from "./app";
 import style from "./assets/css/app.css";
 import style2 from "./assets/css/app.scss";
+import style3 from './assets/css/bootstrap/bootstrap.scss'

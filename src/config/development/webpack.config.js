@@ -35,7 +35,7 @@ config.module = {
     use: [ MiniCssExtractPlugin.loader, "css-loader" ]
   }, {
     test: /\.scss$/,
-    use: [ "style-loader", "css-loader", "sass-loader" ]
+    use: [ MiniCssExtractPlugin.loader, "css-loader", "sass-loader" ]
   }, {
     test: /\.(png|jpg|gif)$/,
     use: [ {
@@ -56,10 +56,10 @@ config.module = {
 }
 
 config.plugins = [
-  new FaviconsWebpackPlugin( {
-    logo: './src/assets/img/favicon/apple-touch-icon-152x152.png',
-    prefix: './icons/',
-  } ),
+  // new FaviconsWebpackPlugin( {
+  //   logo: './src/assets/img/favicon/apple-touch-icon-152x152.png',
+  //   prefix: './icons/',
+  // } ),
   new HtmlWebPackPlugin( {
     template: "./src/template/index.html",
     filename: "./index.html",
