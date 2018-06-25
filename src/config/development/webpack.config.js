@@ -43,6 +43,14 @@ config.module = {
         name: '[path][name].[ext]'
       }
     } ]
+  }, {
+    test: /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/,
+    use: [ {
+      loader: 'file-loader',
+      options: {
+        limit: 8192
+      }
+    } ]
   } ]
 }
 
