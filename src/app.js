@@ -19,6 +19,46 @@ const App = () => {
 
 export default App;
 
+function asyncComponent( getComponent ) {
+
+  return class AsyncComponent extends React.Component {
+
+    constructor() {
+      super()
+      this.state = {}
+      this.state.Component = null
+    }
+
+    componentWillMount() {
+      if ( !this.state.Component ) {
+        getComponent().then( Component => {
+          AsyncComponent.Component = Component
+          this.setState( {
+            Component
+          } )
+        } )
+      }
+    }
+    render() {
+      const {
+        Component
+      } = this.state
+
+      if ( Component ) {
+        return <Component {...this.props} />
+      }
+      return null
+    }
+  }
+}
+
+const Foo = asyncComponent( () =>
+  import ( './foo' ).then( module => module.default )
+)
+const Bar = asyncComponent( () =>
+  import ( './bar' ).then( module => module.default )
+)
+
 const PreventingTransitionsExample = () => (
   <Router>
     <div>
@@ -32,10 +72,18 @@ const PreventingTransitionsExample = () => (
         <li>
           <Link to="/two">Two</Link>
         </li>
+        <li>
+          <Link to="/Foo">Foo</Link>
+        </li>
+         <li>
+          <Link to="/Bar">Bar</Link>
+        </li>
       </ul>
       <Route path="/" exact component={Form} />
       <Route path="/one" render={() => <h3>One</h3>} />
       <Route path="/two" render={() => <h3>Two</h3>} />
+      <Route path="/Foo" component={ Foo } />
+      <Route path="/Bar" component={ Bar } />
     </div>
   </Router>
 );
